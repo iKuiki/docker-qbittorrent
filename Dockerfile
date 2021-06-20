@@ -18,6 +18,7 @@ RUN \
   echo "***** add qbitorrent repositories ****" && \
   apt-get update && \
   apt-get install -y \
+    binutils \
     gnupg \
     python3 && \
   curl -s https://dl.cloudsmith.io/public/qbittorrent-cli/qbittorrent-cli/gpg.F8756541ADDA2B7D.key | apt-key add - && \
@@ -44,6 +45,8 @@ RUN \
     /tmp/* \
     /var/lib/apt/lists/* \
     /var/tmp/*
+
+RUN strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 
 # add local files
 COPY root/ /
